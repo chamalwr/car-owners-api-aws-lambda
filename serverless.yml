@@ -1,0 +1,30 @@
+service: car-owner-api-aws
+
+frameworkVersion: "3"
+
+plugins: ['serverless-offline']
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-east-1
+
+package: { individually: true }
+
+functions:
+  owners:
+    handler: handler.owners
+    events:
+      - httpApi: GET /owners
+  owner: 
+    handler: handler.owner
+    events:
+      - httpApi: GET /owner/{id}
+  removeOwner: 
+    handler: handler.owner
+    events:
+      - httpApi: DELETE /owner/{id}
+  createOwner: 
+    handler: handler.owner
+    events:
+      - httpApi: POST /owner
